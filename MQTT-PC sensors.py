@@ -97,7 +97,8 @@ def publish_if_changed(key, value):
     if prev_values.get(key) != value:
         topic = f"{MQTT_TOPIC_PREFIX}/{hostname}/{key}"
         client.publish(topic, value)
-        print(f"[CHANGED] {key} → {value}")
+        # Use ASCII output to avoid UnicodeEncodeError on Windows cp1252 consoles
+        print(f"[CHANGED] {key} -> {value}")
         prev_values[key] = value
 
 # Publish the configuration once
